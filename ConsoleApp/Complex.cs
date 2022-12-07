@@ -24,7 +24,7 @@ namespace ConsoleApp
             {
                 if (_a == 0)
                 {
-                    return _b.ToString() + "i";
+                    return "(" + _b.ToString() + "i)";
                 }
                 if (_b == 0)
                 {
@@ -32,13 +32,13 @@ namespace ConsoleApp
                 }
                 if (_a == 0 && _b == 0)
                 {
-                    return "0";
+                    return "0i";
                 }
                 if (_b > 0)
                 {
-                    return _a.ToString() + "+" + _b.ToString() + "i";
+                    return "(" + _a.ToString("0.##") + "+" + _b.ToString("0.##") + "i)";
                 }
-                return _a.ToString() + _b.ToString() + "i";
+                return "(" + _a.ToString("0.##") + _b.ToString("0.##") + "i)";
             }
             set => throw new NotImplementedException();
         }
@@ -61,7 +61,7 @@ namespace ConsoleApp
             {
                 throw new DivideByZeroException();
             }
-            return new Complex((_a * c + _b * d) / _div, (_b * c - _a * d) / _div);
+            return new Complex(((_a * c) + (_b * d)) / _div, (_b * c - _a * d) / _div);
         }
 
         public Number Multiply(Number n)
@@ -75,9 +75,9 @@ namespace ConsoleApp
         public Number Subtract(Number n)
         {
             Complex complex = (Complex)n;
-            a = complex.a;
-            b = complex.b;
-            return new Complex(_a - a, _b - b);
+            double c = complex.a;
+            double d = complex.b;
+            return new Complex(_a - c, _b - d);
         }
     }
 }
